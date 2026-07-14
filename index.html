@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Math Quest</title>
+    <meta
+      name="description"
+      content="A touch-friendly daily math game for kids with progress tracking and exportable results."
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="topbar">
+        <div>
+          <h1>Math Quest</h1>
+          <p id="dateLabel" class="muted"></p>
+        </div>
+        <div id="activeStudentPill" class="pill" aria-live="polite"></div>
+      </header>
+
+      <main>
+        <section id="login-view" class="card view active">
+          <h2>Today’s Check-In</h2>
+          <p class="muted">
+            Tap once when you’re ready to play today’s mission.
+          </p>
+          <label class="field-label" for="studentName">Student name</label>
+          <input id="studentName" type="text" inputmode="text" maxlength="18" />
+
+          <div class="cta-row">
+            <button id="startBtn" class="primary">Start Today</button>
+            <button id="startPracticeBtn" class="secondary">Bonus Practice</button>
+          </div>
+
+          <div id="todayDoneHint" class="hint hidden"></div>
+          <div id="quickStats" class="tiny-stats hidden">
+            <div>
+              <span>Last session</span>
+              <strong id="lastScore"></strong>
+            </div>
+            <div>
+              <span>Streak</span>
+              <strong id="streakDisplay"></strong>
+            </div>
+            <div>
+              <span>Best score</span>
+              <strong id="bestScore"></strong>
+            </div>
+          </div>
+        </section>
+
+        <section id="game-view" class="card view">
+          <div class="game-head">
+            <div>
+              <p class="muted">Level</p>
+              <p id="levelLabel" class="stat"></p>
+            </div>
+            <div>
+              <p class="muted">Question</p>
+              <p id="questionIndexLabel" class="stat"></p>
+            </div>
+            <div>
+              <p class="muted">Score</p>
+              <p id="liveScoreLabel" class="stat"></p>
+            </div>
+          </div>
+
+          <div id="questionCard" class="question-card">
+            <p id="questionText"></p>
+            <div id="answerTiles" class="answer-tiles" aria-live="polite"></div>
+            <p id="hintText" class="hint"></p>
+          </div>
+
+          <div id="storyCard" class="story-card">
+            <p class="muted">Story voice helper</p>
+            <div id="storyWords" class="story-words" aria-live="polite"></div>
+            <div class="story-actions">
+              <button id="readStoryBtn" type="button" class="secondary action">
+                Read whole story
+              </button>
+            </div>
+            <p id="storyHint" class="story-hint muted"></p>
+          </div>
+
+          <div id="ledger" class="ledger" aria-live="polite"></div>
+
+          <div class="keypad" id="keypad">
+            <button type="button" class="num" data-digit="1">1</button>
+            <button type="button" class="num" data-digit="2">2</button>
+            <button type="button" class="num" data-digit="3">3</button>
+            <button type="button" class="num" data-digit="4">4</button>
+            <button type="button" class="num" data-digit="5">5</button>
+            <button type="button" class="num" data-digit="6">6</button>
+            <button type="button" class="num" data-digit="7">7</button>
+            <button type="button" class="num" data-digit="8">8</button>
+            <button type="button" class="num" data-digit="9">9</button>
+            <button type="button" class="action" id="delBtn">⌫</button>
+            <button type="button" class="num" data-digit="0">0</button>
+            <button type="button" class="action" id="submitBtn">Enter</button>
+          </div>
+        </section>
+
+        <section id="result-view" class="card view">
+          <h2>Great work today</h2>
+          <p class="muted" id="resultDate"></p>
+
+          <div class="result-grid">
+            <div class="result-tile">
+              <span class="tiny">Score</span>
+              <strong id="resultScore"></strong>
+            </div>
+            <div class="result-tile">
+              <span class="tiny">Accuracy</span>
+              <strong id="resultAccuracy"></strong>
+            </div>
+            <div class="result-tile">
+              <span class="tiny">Best</span>
+              <strong id="resultBest"></strong>
+            </div>
+            <div class="result-tile">
+              <span class="tiny">Streak</span>
+              <strong id="resultStreak"></strong>
+            </div>
+          </div>
+
+          <div id="lessonPlan" class="lesson-plan" role="note"></div>
+
+          <h3>Recent days</h3>
+          <div id="recentList" class="recent-list"></div>
+
+          <details class="coach">
+            <summary>Coach tools (parent)</summary>
+            <div class="coach-block">
+              <button id="exportTodayBtn" class="primary">Copy today (JSON)</button>
+              <button id="downloadAllBtn" class="secondary">Download all data</button>
+              <button id="rawJsonBtn" class="secondary">Copy storage JSON</button>
+              <button id="clearBtn" class="warning">Clear this student</button>
+              <p class="muted tiny">
+                Tip: paste today’s export into Claude and ask for tomorrow’s lesson plan.
+              </p>
+            </div>
+          </details>
+
+          <div class="cta-row">
+            <button id="backToLoginBtn" class="primary">Back to start</button>
+            <button id="playAgainBtn" class="secondary">Play bonus round</button>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>
